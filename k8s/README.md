@@ -192,4 +192,20 @@ StatefulSet is the workload API object used to manage stateful applications.
 Manages the deployment and scaling of a set of Pods , and provides guarantees about the ordering and uniqueness of these Pods.
 Like a Deployment , a StatefulSet manages Pods that are based on an identical container spec. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of their Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
 
+### CR ->  
+Custom resources are extensions of the Kubernetes API.  Once a custom resource is installed, users can create and access its objects using kubectl, just as they do for built-in resources like Pods.
 
+Custom controllers
+On their own, custom resources simply let you store and retrieve structured data. When you combine a custom resource with a custom controller, custom resources provide a true declarative API.
+
+Kubernetes provides two ways to add custom resources to your cluster:
+
+CRDs are simple and can be created without any programming.
+API Aggregation requires programming, but allows more control over API behaviors like how data is stored and conversion between API versions.
+
+A declarative API allows you to declare or specify the desired state of your resource and tries to keep the current state of Kubernetes objects in sync with the desired state. The controller interprets the structured data as a record of the user's desired state, and continually maintains this state.
+
+### CRD ->  
+When you create a new CustomResourceDefinition (CRD), the Kubernetes API Server creates a new RESTful resource path for each version you specify. The CRD can be either namespaced or cluster-scoped, as specified in the CRD's scope field.
+
+Create custom objects, After the CustomResourceDefinition object has been created, you can create custom objects. Custom objects can contain custom fields. These fields can contain arbitrary JSON.
