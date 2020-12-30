@@ -129,3 +129,20 @@ Channel are used to communicate between main routine and go routens
 
 
 Receiving messages from go routine is a blocking code  
+
+Need to check
+1) Experience with the full site of Go frameworks and tools, including:
+(a) Dependency management tools such as Godep, Sltr, etc
+(b) Go's templating language
+(c) Go's code generation tools, such as Stringer
+(d) Popular Go web Frameworks, such as Revel
+(e) Router packages, such as Gorilla Mux
+2) Ability to write clean and effective Godoc comments
+3) Familiarity with code versioning tools.
+4) Knowledge of shell scripts, hypervisors such as ESX/Hyper-V/KVM.
+5) Exposure to various public & private cloud, such as AWS & Azure.
+6) Good expertise on and Unix/Linux platforms and hands-on experience with Ansible playbooks
+7) Good to have (Hands-on experience): VMware, AWS, Virtual networking, Azure, Docker, Kubernetes
+8) Proven skills in developing modern responsive web applications. Please include in any of your CodeSandbox or Github profiles.
+9) Collaborate with engineering, product, and cross-functional teams to devise optimal engineering solutions.
+10) Familiarity with technologies such as distributed computing and/or scalable platforms; e.g. how to separate concerns (business logic vs UI vs state). 
