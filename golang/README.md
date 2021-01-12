@@ -145,4 +145,78 @@ Need to check
 7) Good to have (Hands-on experience): VMware, AWS, Virtual networking, Azure, Docker, Kubernetes
 8) Proven skills in developing modern responsive web applications. Please include in any of your CodeSandbox or Github profiles.
 9) Collaborate with engineering, product, and cross-functional teams to devise optimal engineering solutions.
-10) Familiarity with technologies such as distributed computing and/or scalable platforms; e.g. how to separate concerns (business logic vs UI vs state). 
+10) Familiarity with technologies such as distributed computing and/or scalable platforms; e.g. how to separate concerns (business logic vs UI vs state).
+
+Interview question in golang
+Why Golang
+What is Goroutine
+How to communicate between goroutines
+What is mutex?
+What is synchronization 
+How to achieve concurrency in Go 
+What is Channels in go?
+What are the Types of Channels?
+What is Buffered Channel and Unbuffered Channel explain?
+How to avoid deadlock in a goroutine?
+How Goroutines Works?
+What is methods in Go?
+What anonymous function?
+What Variadic function?
+Explain Slices in Go in detail how they differ from another language?
+What is Closures in go?
+What is interface in Go?
+Does go support OOP?
+Explain the OOPs concept.
+How to create a basic server in Go?
+What are the basic data structures in Go?
+What is reflection
+What is byte [] slice
+How to create a Public/Private function in go (Access modifier in Go?)
+Does go function return multiple values?
+Difference between concurrency and Parralism?
+What is a map in go?
+Difference between new and make?
+What is Worker Pool?
+How map prints data
+What is rune?
+How Append function Works?
+What is the REST API?
+What is Middleware?
+What is microservices?
+How to handle error in go? 
+What is the Defer keyword?
+What is Recover?
+Difference between function and method?
+What is the empty interface?
+What is struct type?
+What is Enum in go?
+What is Go Module?
+How to manage dependency in Go?
+What is Packages in go?
+What is Select in go?
+What is IOTA?
+What is panic in go how to handle it?
+Do you know net/http package?
+What is JSON Encoding and Decoding?
+
+Coding interview questions
+Write any method code
+Swap if the number is greater than the next number
+Find the key from the array (not in any easy way, split the array into two then search)
+Find the count of words in a long string
+Check if the website is active or not?
+Find the random number with x length
+Find longest increasing subsequence in an array
+Get unique values from a slice of int with count
+Write palindrome program in go
+Get pairs with x difference only unique pairs
+Reverse a string Input = ‘Hello’, Output = ‘olleH’
+Write Code :- Input : "aabbbcccab" , Output: "aa2bbb3ccc3a1b1"
+Print unique elements form array, Input = [2,3,4,5,2,3], Output =  [2,3,4,5]
+Find the lengthiest word.  Input =’ i am in Bangalore‘
+Check whether it is closed or not.  Input =’{([])}’
+Count the repeat numbers Input = [2,3,4,5,2,3,2, 5, 2], Output = {2:4, 3:2, 4:1, 5:2}
+Display the middle number, Input = [2,3,4,5,2,3,7]
+Find Combination of pair elements which give 0, Input = [ -1, 0, 1, -2, 2, 3, 4, 5, 2, 3]
+Write a program use type interface with goroutines and channels.
+Generate N digit random number based on input. input : 5 , Output : 93657 Input : 2, Output : 47 
