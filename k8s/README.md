@@ -209,3 +209,7 @@ A declarative API allows you to declare or specify the desired state of your res
 When you create a new CustomResourceDefinition (CRD), the Kubernetes API Server creates a new RESTful resource path for each version you specify. The CRD can be either namespaced or cluster-scoped, as specified in the CRD's scope field.
 
 Create custom objects, After the CustomResourceDefinition object has been created, you can create custom objects. Custom objects can contain custom fields. These fields can contain arbitrary JSON.
+
+## CKA/CKAD  
+kodekloud's mock tests  
+killer.sh  
