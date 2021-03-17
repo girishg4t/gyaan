@@ -151,20 +151,40 @@ Interview question in golang
 Why Golang  
 What is Goroutine  
 How to communicate between goroutines  
-What is mutex?  
+What is mutex?  :
+ We've seen how channels are great for communication among goroutines.
+
+But what if we don't need communication? What if we just want to make sure only one goroutine can access a variable at a time to avoid conflicts?
+
+This concept is called mutual exclusion, and the conventional name for the data structure that provides it is mutex
 What is synchronization  
 How to achieve concurrency in Go  
+Concurrency in Golang is the ability for functions to run independent of each other. A goroutine is a function that is capable of running concurrently with other functions. When you create a function as a goroutine, it has been treated as an independent unit of work that gets scheduled and then executed on an available logical processor. The Golang runtime scheduler has feature to manages all the goroutines that are created and need processor time. The scheduler binds operating system's threads to logical processors in order to execute the goroutines. By sitting on top of the operating system, scheduler controls everything related to which goroutines are running on which logical processors at any given time.
 What is Channels in go?  
+Channels are the pipes that connect concurrent goroutines. You can send values into channels from one goroutine and receive those values into another goroutine.
 What are the Types of Channels?  
+ Like array, slice and map, each channel type has an element type. A channel can only transfer values of the element type of the channel.
+Channel types can be bi-directional or single-directional. Assume T is an arbitrary type,
+
+    chan T denotes a bidirectional channel type. Compilers allow both receiving values from and sending values to bidirectional channels.
+    chan<- T denotes a send-only channel type. Compilers don't allow receiving values from send-only channels.
+    <-chan T denotes a receive-only channel type. Compilers don't allow sending values to receive-only channels.
+
 What is Buffered Channel and Unbuffered Channel explain?  
-How to avoid deadlock in a goroutine?  
-How Goroutines Works?  
+There are two types of channels based on their behavior of data exchange: unbuffered channels and buffered channels. An unbuffered channel is used to perform synchronous communication between goroutines while a buffered channel is used for perform asynchronous communication. An unbuffered channel provides a guarantee that an exchange between two goroutines is performed at the instant the send and receive take place. A buffered channel has no such guarantee.
+How to avoid deadlock in a goroutine? 
+When you trying to read or write data from the channel but the channel does not have value. So, it blocks the current execution of the goroutine and passes the control to other goroutines, but if there is no other goroutine is available or other goroutines are sleeping due to this situation program will crash. This phenomenon is known as deadlock
+* How Goroutines Works?  
+If a goroutine is blocking, the runtime will start a new OS thread to handle the other goroutines until the blocking one stops blocking.
 What is methods in Go?  
+
 What anonymous function?  
 What Variadic function?  
+Variadic functions can be called with any number of trailing arguments
 Explain Slices in Go in detail how they differ from another language?  
 What is Closures in go?  
 What is interface in Go?  
+interfaces let us write functions that are more flexible and adaptable because they are not tied to the details of one particular implementation. Go’s interfaces so distinctive is that they are satisfied implicitly. In other words, there’s no need to declare all the interfaces that a given concrete type satisfies; simply possessing the necessary methods is enough
 Does go support OOP?  
 Explain the OOPs concept.  
 How to create a basic server in Go?  
