@@ -94,6 +94,14 @@ This is an operator - it means We want to manipulate the value The pointer is re
 Turn address into value with *address  
 Turn value into address with &value  
 
+The two newInt functions below have identical behaviors
+```
+func newInt() *int {            func newInt() *int {
+    return new(int)                 var dummy int
+}                                   return &dummy
+                                }
+```                                
+
 
 #### To handle list
 Array => Fixed length list of things  
