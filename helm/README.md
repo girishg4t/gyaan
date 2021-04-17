@@ -14,5 +14,3 @@ Here are some of Helm’s main features:
     Hooks for chart authors to manage the life cycle
     Support for running tests after installing a chart
 
-Reference:    
-https://github.com/rahulsidgondapatil/sample-depSvcController
