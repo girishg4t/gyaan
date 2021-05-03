@@ -24,3 +24,11 @@ https://www.youtube.com/c/TechDummiesNarendraL/playlists
 programmingpathshala youtube 
 
 https://leetcode.com/
+***********
+
+Data structure references
+https://github.com/kdn251/interviews/blob/master/README.md
+
+
+https://www.freecodecamp.org/news/coding-interviews-for-dummies-5e048933b82b/https://www.freecodecamp.org/news/coding-interviews-for-dummies-5e048933b82b/
+
