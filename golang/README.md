@@ -431,3 +431,18 @@ Diffrence between post and Get:
 
 
 ***************************************
+Liberary and usage
+- Zap => Blazing fast, structured, leveled logging (provide parent and child level logging system)
+https://github.com/uber-go/zap
+- gorilla/mux => A powerful HTTP router and URL matcher for building Go web servers with gorilla
+it does complex request routing like segmenting a request URL into single parameters
+https://github.com/gorilla/mux
+- Ginkgo and Gomega => Ginkgo is a Go testing framework built to help you efficiently write expressive and comprehensive tests and Gomega is a assertion library.
+https://github.com/onsi/ginkgohttps://github.com/onsi/ginkgo
+- Gorm => The fantastic ORM library for Golang, aims to be developer friendly 
+https://github.com/go-gorm/gorm
+
+
+
+### Internals of goroutines and channels  
+https://www.notion.so/Internals-of-goroutines-and-Channels-ab82d73925054211a2fa7e3d4a7c54a2
