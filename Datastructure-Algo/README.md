@@ -10,3 +10,6 @@ Which code is best
 1) Readable
 2) Speed
 3) Memory
+
+Searching is fast in binery search
+Finding things in an unsorted array is through hash table
