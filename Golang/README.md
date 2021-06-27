@@ -44,6 +44,8 @@
 #### Manage Goroutines Lifecycle
 * https://github.com/oklog/run
 
+### Go coding style
+* https://github.com/uber-go/guide/blob/master/style.md
 #### Go Advicer
 * https://github.com/cristaloleg/go-advice
 
@@ -96,11 +98,11 @@ Int
 Float64  
 
 := this is used only for new variable  
-  
-For i , card := range cards{  
+```code
+for i , card := range cards{  
   fmt.Println(i, card)  
 }  
-
+```
 Type deck []string 
 
 Receiver function :  set’s up method on the variable we create 
@@ -204,23 +206,24 @@ Need to check
 9) Collaborate with engineering, product, and cross-functional teams to devise optimal engineering solutions.
 10) Familiarity with technologies such as distributed computing and/or scalable platforms; e.g. how to separate concerns (business logic vs UI vs state).
 
-Interview question in golang
-Why Golang  
-What is Goroutine  
-How to communicate between goroutines  
-What is mutex?  :
- We've seen how channels are great for communication among goroutines.
+## Interview question in golang
+1) Why Golang  
+2) What is Goroutine  
+3) How to communicate between goroutines  
+4) What is mutex?  =>  
+    We've seen how channels are great for communication among goroutines.
 
-But what if we don't need communication? What if we just want to make sure only one goroutine can access a variable at a time to avoid conflicts?
+    But what if we don't need communication? What if we just want to make sure only one goroutine can access a variable at a time to avoid conflicts?
 
-This concept is called mutual exclusion, and the conventional name for the data structure that provides it is mutex
-What is synchronization  
-How to achieve concurrency in Go  
+    This concept is called mutual exclusion, and the conventional name for the data structure that provides it is mutex
+
+5) What is synchronization  
+6) How to achieve concurrency in Go  
 - https://codeburst.io/why-goroutines-are-not-lightweight-threads-7c460c1f155f  
 - Concurrency in Golang is the ability for functions to run independent of each other. A goroutine is a function that is capable of running concurrently with other functions. When you create a function as a goroutine, it has been treated as an independent unit of work that gets scheduled and then executed on an available logical processor. The Golang runtime scheduler has feature to manages all the goroutines that are created and need processor time. The scheduler binds operating system's threads to logical processors in order to execute the goroutines. By sitting on top of the operating system, scheduler controls everything related to which goroutines are running on which logical processors at any given time.
-What is Channels in go?  
+7) What is Channels in go?  =>  
 Channels are the pipes that connect concurrent goroutines. You can send values into channels from one goroutine and receive those values into another goroutine.
-What are the Types of Channels?  
+8) What are the Types of Channels?  =>  
  Like array, slice and map, each channel type has an element type. A channel can only transfer values of the element type of the channel.
 Channel types can be bi-directional or single-directional. Assume T is an arbitrary type,
 
@@ -228,21 +231,21 @@ Channel types can be bi-directional or single-directional. Assume T is an arbitr
     chan<- T denotes a send-only channel type. Compilers don't allow receiving values from send-only channels.
     <-chan T denotes a receive-only channel type. Compilers don't allow sending values to receive-only channels.
 
-What is Buffered Channel and Unbuffered Channel explain?  
+9) What is Buffered Channel and Unbuffered Channel explain?  =>  
 There are two types of channels based on their behavior of data exchange: unbuffered channels and buffered channels. An unbuffered channel is used to perform synchronous communication between goroutines while a buffered channel is used for perform asynchronous communication. An unbuffered channel provides a guarantee that an exchange between two goroutines is performed at the instant the send and receive take place. A buffered channel has no such guarantee.
-How to avoid deadlock in a goroutine? 
+10) How to avoid deadlock in a goroutine?  =>  
 When you trying to read or write data from the channel but the channel does not have value. So, it blocks the current execution of the goroutine and passes the control to other goroutines, but if there is no other goroutine is available or other goroutines are sleeping due to this situation program will crash. This phenomenon is known as deadlock
-* How Goroutines Works?  
+11) How Goroutines Works?  =>  
 If a goroutine is blocking, the runtime will start a new OS thread to handle the other goroutines until the blocking one stops blocking.
-What is methods in Go?  
+12) What is methods in Go?  
 
-What anonymous function?  
-What Variadic function?  
-Variadic functions can be called with any number of trailing arguments
-Explain Slices in Go in detail how they differ from another language?  
-What is Closures in go?  
-What is interface in Go?  
-interfaces let us write functions that are more flexible and adaptable because they are not tied to the details of one particular implementation. Go’s interfaces so distinctive is that they are satisfied implicitly. In other words, there’s no need to declare all the interfaces that a given concrete type satisfies; simply possessing the necessary methods is enough
+13) What anonymous function?  
+14) What Variadic function?  
+15) Variadic functions can be called with any number of trailing arguments
+16) Explain Slices in Go in detail how they differ from another language?  
+17) What is Closures in go?  
+18) What is interface in Go?  
+    Interfaces let us write functions that are more flexible and adaptable because they are not tied to the details of one particular implementation. Go’s interfaces so distinctive is that they are satisfied implicitly. In other words, there’s no need to declare all the interfaces that a given concrete type satisfies; simply possessing the necessary methods is enough
 ```
 package main
 
@@ -308,65 +311,42 @@ func main() {
 }
 ```
 The biggest advantage of this is that totalExpense can be extended to any new employee type without any code changes. Let's say the company adds a new type of employee Freelancer with a different salary structure. This Freelancer can just be passed in the slice argument to totalExpense without even a single line of code change to the totalExpense function.  
-Does go support OOP?  
-Explain the OOPs concept.  
-How to create a basic server in Go?  
-What are the basic data structures in Go?  
-What is reflection  
-What is byte [] slice  
-How to create a Public/Private function in go (Access modifier in Go?)  
-Does go function return multiple values?  
-Difference between concurrency and Parralism?  
-What is a map in go?  
-Difference between new and make?  
-What is Worker Pool?  
-How map prints data  
-What is rune?  
-How Append function Works?  
-What is the REST API?  
-What is Middleware?  
-What is microservices?  
-How to handle error in go?   
-What is the Defer keyword?  
-If a deferred func evaluates to nil, execution panics when the surrounding func ends not when defer is called.
-What is Recover?  
-Recover is a built-in function that regains control of a panicking goroutine. Recover is only useful inside deferred functions. During normal execution, a call to recover will return nil and have no other effect. If the current goroutine is panicking, a call to recover will capture the value given to panic and resume normal execution.
-Difference between function and method?  
-What is the empty interface?  
-What is struct type?  
-What is Enum in go?  
-What is Go Module?  
-How to manage dependency in Go?  
-What is Packages in go?  
-What is Select in go?  
-What is IOTA?   
-What is panic in go how to handle it?  
-Do you know net/http package?  
-What is JSON Encoding and Decoding?  
-
-
-Coding interview questions :
-
-Write any method code  
-Swap if the number is greater than the next number  
-Find the key from the array (not in any easy way, split the array into two then search)  
-Find the count of words in a long string  
-Check if the website is active or not?  
-Find the random number with x length  
-Find longest increasing subsequence in an array  
-Get unique values from a slice of int with count  
-Write palindrome program in go  
-Get pairs with x difference only unique pairs  
-Reverse a string Input = ‘Hello’, Output = ‘olleH’  
-Write Code :- Input : "aabbbcccab" , Output: "aa2bbb3ccc3a1b1"  
-Print unique elements form array, Input = [2,3,4,5,2,3], Output =  [2,3,4,5]  
-Find the lengthiest word.  Input =’ i am in Bangalore‘  
-Check whether it is closed or not.  Input =’{([])}’  
-Count the repeat numbers Input = [2,3,4,5,2,3,2, 5, 2], Output = {2:4, 3:2, 4:1, 5:2}  
-Display the middle number, Input = [2,3,4,5,2,3,7]  
-Find Combination of pair elements which give 0, Input = [ -1, 0, 1, -2, 2, 3, 4, 5, 2, 3]  
-Write a program use type interface with goroutines and channels.  
-Generate N digit random number based on input. input : 5 , Output : 93657 Input : 2, Output : 47   
+19) Does go support OOP?  
+20) Explain the OOPs concept.  
+21) How to create a basic server in Go?  
+22) What are the basic data structures in Go?  
+23) What is reflection  
+24) What is byte [] slice  
+25) How to create a Public/Private function in go (Access modifier in Go?)  
+26) Does go function return multiple values?  
+27)Difference between concurrency and Parralism?  
+28) What is a map in go?  
+29) Difference between new and make?  
+30) What is Worker Pool?  
+31) How map prints data  
+32) What is rune?  
+33) How Append function Works?  
+34) What is the REST API?  
+35) What is Middleware?  
+36) What is microservices?  
+37) How to handle error in go?   
+38) What is the Defer keyword?  
+    If a deferred func evaluates to nil, execution panics when the surrounding func ends not when defer is called.
+39) What is Recover?  
+    Recover is a built-in function that regains control of a panicking goroutine. Recover is only useful inside deferred functions. During normal execution, a call to recover will return nil and have no other effect. If the current goroutine is panicking, a call to recover will capture the value given to panic and resume normal execution.
+40) Difference between function and method?  
+41) What is the empty interface?  
+42) What is struct type?  
+43) What is Enum in go?  
+44) What is Go Module?  
+45) How to manage dependency in Go?  
+46) What is Packages in go?  
+47) What is Select in go?  
+48) What is IOTA?   
+49) What is panic in go how to handle it?  
+50) Do you know net/http package?  
+51) What is JSON Encoding and Decoding?  
+  
 
 **************
 What is Package Context in Go" and how we are using it? 
