@@ -189,23 +189,6 @@ Channel are used to communicate between main routine and go routens
 
 Receiving messages from go routine is a blocking code  
 
-Need to check
-1) Experience with the full site of Go frameworks and tools, including:
-(a) Dependency management tools such as Godep, Sltr, etc
-(b) Go's templating language
-(c) Go's code generation tools, such as Stringer
-(d) Popular Go web Frameworks, such as Revel
-(e) Router packages, such as Gorilla Mux
-2) Ability to write clean and effective Godoc comments
-3) Familiarity with code versioning tools.
-4) Knowledge of shell scripts, hypervisors such as ESX/Hyper-V/KVM.
-5) Exposure to various public & private cloud, such as AWS & Azure.
-6) Good expertise on and Unix/Linux platforms and hands-on experience with Ansible playbooks
-7) Good to have (Hands-on experience): VMware, AWS, Virtual networking, Azure, Docker, Kubernetes
-8) Proven skills in developing modern responsive web applications. Please include in any of your CodeSandbox or Github profiles.
-9) Collaborate with engineering, product, and cross-functional teams to devise optimal engineering solutions.
-10) Familiarity with technologies such as distributed computing and/or scalable platforms; e.g. how to separate concerns (business logic vs UI vs state).
-
 ## Interview question in golang
 1) Why Golang  
 2) What is Goroutine  
@@ -397,29 +380,17 @@ What is Atoi and Itoa ?
 
 What is gRPC?
 
-Diffrence between post and Get:
-- POST requests are never cached
-  GET requests can be cached
-- GET requests remain in the browser history
-  POST requests do not remain in the browser history
-- GET requests can be bookmarked
-  POST requests cannot be bookmarked
-- GET requests should never be used when dealing with sensitive data
-- GET requests have length restrictions
-  POST requests have no restrictions on data length
-- GET requests are only used to request data (not modify)
-
-
 ***************************************
 Liberary and usage
-- Zap => Blazing fast, structured, leveled logging (provide parent and child level logging system)
+- Zap => Blazing fast, structured, leveled logging (provide parent and child level logging system)  
 https://github.com/uber-go/zap
 - gorilla/mux => A powerful HTTP router and URL matcher for building Go web servers with gorilla
-it does complex request routing like segmenting a request URL into single parameters
+it does complex request routing like segmenting a request URL into single parameters  
 https://github.com/gorilla/mux
-- Ginkgo and Gomega => Ginkgo is a Go testing framework built to help you efficiently write expressive and comprehensive tests and Gomega is a assertion library.
-https://github.com/onsi/ginkgohttps://github.com/onsi/ginkgo
-- Gorm => The fantastic ORM library for Golang, aims to be developer friendly 
+- Ginkgo and Gomega => Ginkgo is a Go testing framework built to help you efficiently write expressive and comprehensive tests and Gomega is a assertion library.  
+https://github.com/onsi/ginkgo   
+https://github.com/onsi/ginkgo  
+- Gorm => The fantastic ORM library for Golang, aims to be developer friendly   
 https://github.com/go-gorm/gorm
 
 

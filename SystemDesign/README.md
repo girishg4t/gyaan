@@ -14,3 +14,16 @@ If the load balancer is instructed to use sticky sessions, all of your interacti
 To summarize, In case of Sticky Sessions, all your requests will be directed to the same physical web server while in case of a non-sticky loadbalancer may choose any webserver to serve your requests.
 
 As an example, you may read about Amazon's Elastic Load Balancer and sticky sessions here : http://aws.typepad.com/aws/2010/04/new-elastic-load-balancing-feature-sticky-sessions.html
+
+
+### Diffrence between post and Get:
+- POST requests are never cached
+  GET requests can be cached
+- GET requests remain in the browser history
+  POST requests do not remain in the browser history
+- GET requests can be bookmarked
+  POST requests cannot be bookmarked
+- GET requests should never be used when dealing with sensitive data
+- GET requests have length restrictions
+  POST requests have no restrictions on data length
+- GET requests are only used to request data (not modify)
