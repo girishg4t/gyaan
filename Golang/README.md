@@ -317,6 +317,12 @@ Important Points:
 - Always remember a string is a sequence of bytes not of a rune. But it is possible that a string may contain Unicode text encoded in UTF-8 and as we knew that the go source code in always encodes as UTF-8 so, there is no need to encode the string in UTF-8.
 - UTF-8 encodes all the Unicode in between 1 to 4 bytes, where 1 byte is used for ASCII and rest used for the rune.
 - ASCII contains total 256 elements. In which 128 are characters and 0-127 are identified as code points. Here code point refers to the element which represents a single value.
+Rune literals are just 32-bit integer values (however they're untyped constants, so their type can change). They represent unicode codepoints. For example, the rune literal 'a' is actually the number 97.
+Rune is a Type. It occupies 32bit and is meant to represent a Unicode CodePoint. As an analogy the english characters set encoded in 'ASCII' has 128 code points. Thus is able to fit inside a byte (8bit). From this (erroneous) assumption C treated characters as 'bytes' char, and 'strings' as a 'sequence of characters' char*.
+
+But guess what. There are many other symbols invented by humans other than the 'abcde..' symbols. And there are so many that we need 32 bit to encode them.
+
+In golang then a string is a sequence of bytes. However, **since multiple bytes can represent a rune code-point**, a string value can also contain runes. So, it can be converted to a []rune, or vice versa.
 33) How Append function Works?  
 34) What is the REST API?  
 35) What is Middleware?  
