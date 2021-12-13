@@ -41,3 +41,9 @@ After getting an IP address, resolver stores it in its cache so that next time, 
 ### 4) What is L1 & L2 cache?
 
 ### 5) What is virtual memory? Explain paging
+
+### 6) What is a distributed denial of service attack (DDoS) and what can you do about them?
+https://www.cloudflare.com/en-in/learning/ddos/what-is-a-ddos-attack/
+
+### 7) HTTP/1.1 vs HTTP/2: What's the Difference?
+HTTP/2 solves several problems that the creators of HTTP/1.1 did not anticipate. In particular, HTTP/2 is much faster and more efficient than HTTP/1.1. One of the ways in which HTTP/2 is faster is in how it prioritizes content during the loading process.

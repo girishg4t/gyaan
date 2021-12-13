@@ -191,6 +191,8 @@ Receiving messages from go routine is a blocking code
 
 ## Interview question in golang
 1) Why Golang  
+2.1) What are primitive data types
+https://technobeans.com/2019/01/03/3-interesting-primitive-data-types-in-golang/
 2) What is Goroutine  
 3) How to communicate between goroutines  
 4) What is mutex?  =>  
@@ -308,12 +310,47 @@ The biggest advantage of this is that totalExpense can be extended to any new em
 30) What is Worker Pool?  
 31) How map prints data  
 32) What is rune?  
+In the past, we only deal with one character set that is known as ASCII or the American Standard Code for Information Interchange. Here we use 7 bits to represent 128 characters, including upper and lowercase English letters, digits, and a variety of punctuations and device-control characters. Due to this a large number of the population of the world is not able to use their own writing system on the computer. So to solve this problem Unicode is invented. It is a superset of ASCII and contains all the characters present in the world’s writing system including accents and other diacritical marks, control codes like tab and carriage return, and assigns each one a standard number called a Unicode code point, or in Go language, a rune. The rune type is an alias of int32.
+
+Important Points:
+
+- Always remember a string is a sequence of bytes not of a rune. But it is possible that a string may contain Unicode text encoded in UTF-8 and as we knew that the go source code in always encodes as UTF-8 so, there is no need to encode the string in UTF-8.
+- UTF-8 encodes all the Unicode in between 1 to 4 bytes, where 1 byte is used for ASCII and rest used for the rune.
+- ASCII contains total 256 elements. In which 128 are characters and 0-127 are identified as code points. Here code point refers to the element which represents a single value.
 33) How Append function Works?  
 34) What is the REST API?  
 35) What is Middleware?  
 36) What is microservices?  
 37) How to handle error in go?   
 38) What is the Defer keyword?  
+1. A deferred function’s arguments are evaluated when the defer statement is evaluated.  
+```go
+func a() {
+    i := 0
+    defer fmt.Println(i)
+    i++
+    return
+}
+```
+The deferred call will print “0”
+2. Deferred function calls are executed in Last In First Out order after the surrounding function returns.  
+```go
+func b() {
+    for i := 0; i < 4; i++ {
+        defer fmt.Print(i)
+    }
+}
+```
+This function prints “3210”  
+3. Deferred functions may read and assign to the returning function’s named return values.  
+```go
+func c() (i int) {
+    defer func() { i++ }()
+    return 1
+}
+
+```
+This function returns 2  
     If a deferred func evaluates to nil, execution panics when the surrounding func ends not when defer is called.
 39) What is Recover?  
     Recover is a built-in function that regains control of a panicking goroutine. Recover is only useful inside deferred functions. During normal execution, a call to recover will return nil and have no other effect. If the current goroutine is panicking, a call to recover will capture the value given to panic and resume normal execution.
@@ -329,7 +366,6 @@ The biggest advantage of this is that totalExpense can be extended to any new em
 49) What is panic in go how to handle it?  
 50) Do you know net/http package?  
 51) What is JSON Encoding and Decoding?  
-  
 
 **************
 What is Package Context in Go" and how we are using it? 
