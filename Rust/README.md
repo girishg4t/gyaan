@@ -61,3 +61,120 @@ Cargo.lock file
 - Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.
 1) A tuple is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length: once declared, they cannot grow or shrink in size.
 2) The Array Type - Unlike a tuple, every element of an array must have the same type. Unlike arrays in some other languages, arrays in Rust have a fixed length.
+
+
+### Ownership - stack and heap
+The heap is less organized: when you put data on the heap, you request a certain amount of space. The memory allocator finds an empty spot in the heap that is big enough, marks it as being in use, and returns a pointer, which is the address of that location. Because the pointer to the heap is a known, fixed size, you can store the pointer on the stack, but when you want the actual data, you must follow the pointer.
+
+#### Ownership rules
+ - Each value in Rust has an owner.
+ - There can only be one owner at a time.
+ - When the owner goes out of scope, the value will be dropped.
+
+ Strings - With the String type, in order to support a mutable, growable piece of text, we need to allocate an amount of memory on the heap, unknown at compile time, to hold the contents.
+
+ When a variable goes out of scope, Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory. Rust calls drop automatically at the closing curly bracket.
+
+ ``` let x = 5;
+    let y = x;
+```
+
+<img src="./resources/string.svg" width="250" height="250" />
+
+```
+ let s1 = String::from("hello");
+    let s2 = s1;
+
+    println!("{}, world!", s1);
+```
+To ensure memory safety, after the line let s2 = s1, Rust considers s1 as no longer valid. Therefore, Rust doesn’t need to free anything when s1 goes out of scope.
+That solves our problem! With only s2 valid, when it goes out of scope, it alone will free the memory, and we’re done.
+
+
+but the code we show above for integer seems to contradict what we just learned: we don’t have a call to clone, but x is still valid and wasn’t moved into y.
+
+The reason is that types such as integers that have a known size at compile time are stored entirely on the stack, so copies of the actual values are quick to make. That means there’s no reason we would want to prevent x from being valid after we create the variable y.
+
+
+### References and Borrowing
+we can provide a reference to the String value. A reference is like a pointer in that it’s an address we can follow to access the data stored at that address; that data is owned by some other variable. Unlike a pointer, a reference is guaranteed to point to a valid value of a particular type for the life of that reference.
+```
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+
+```
+
+Below code will print 'hello world'
+
+```
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+    println!("{}", s)
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+The Rules of References:
+
+    - At any given time, you can have either one mutable reference or any number of immutable references.
+    - References must always be valid.
+
+
+### Structs 
+Rust also supports structs that look similar to tuples, called tuple structs. 
+
+Tuple structs have the added meaning the struct name provides but don’t have names associated with their fields; rather, they just have the types of the fields
+
+```
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+}
+```
+
+### Enum
+This can be combined
+```
+    enum IpAddrKind {
+        V4,
+        V6,
+    }
+
+    struct IpAddr {
+        kind: IpAddrKind,
+        address: String,
+    }
+```
+
+
+#### Packages
+
+- Packages: A Cargo feature that lets you build, test, and share crates
+- Crates: A tree of modules that produces a library or executable
+- Modules and use: Let you control the organization, scope, and privacy of paths
+- Paths: A way of naming an item, such as a struct, function, or module
+
+#### Collections
+Most other data types represent one specific value, but collections can contain multiple values. Unlike the built-in array and tuple types, the data these collections point to is stored on the heap, which means the amount of data does not need to be known at compile time and can grow or shrink as the program runs
+
+- A vector allows you to store a variable number of values next to each other.
+- A string is a collection of characters.
+- A hash map allows you to associate a value with a particular key.
+
