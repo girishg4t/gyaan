@@ -4,6 +4,11 @@ With the help of rust programming language we can write code that can deals with
 
 - Cargo - the included dependency manager and build tool, makes adding, compiling, and managing dependencies painless and consistent across the Rust ecosystem. 
 
+Three ways of borrowing
+- borrowing immutably
+- borrowing mutably
+- taking ownership
+
 ### Mutable vs Immutable
 
 ```sh
@@ -178,3 +183,251 @@ Most other data types represent one specific value, but collections can contain 
 - A string is a collection of characters.
 - A hash map allows you to associate a value with a particular key.
 
+#### Error Handling
+Rust groups errors into two major categories: recoverable and unrecoverable errors.
+Rust doesn’t have exceptions. Instead, it has the type Result<T, E> for recoverable errors and the panic! macro that stops execution when the program encounters an unrecoverable error.
+
+```
+use std::fs::File;
+use std::io;
+use std::io::Read;
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut f = File::open("hello.txt")?;
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
+}
+```
+If the value of the Result is an Ok, the value inside the Ok will get returned from this expression, and the program will continue. If the value is an Err, the Err will be returned from the whole function as if we had used the return keyword so the error value gets propagated to the calling code.
+
+
+#### Generics
+Specifying Multiple Trait Bounds with the + Syntax
+we wanted notify to use display formatting as well as summarize on item: we specify in the notify definition that item must implement both Display and Summary. We can do so using the + syntax:
+```
+pub fn notify(item: &(impl Summary + Display)) {
+```
+The + syntax is also valid with trait bounds on generic types:
+```
+pub fn notify<T: Summary + Display>(item: &T) {
+```
+
+Each generic has its own trait bounds, so functions with multiple generic type parameters can contain lots of trait bound information between the function’s name and its parameter list, making the function signature hard to read.
+
+Rust has alternate syntax for specifying trait bounds inside a where clause 
+```
+fn some_function<T, U>(t: &T, u: &U) -> i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{
+```
+
+LIfetime
+```
+fn main() {
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+
+    let result = longest(string1.as_str(), string2);
+    println!("The longest string is {}", result);
+}
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+```
+The function signature now tells Rust that for some lifetime 'a, the function takes two parameters, both of which are string slices that live at least as long as lifetime 'a. The function signature also tells Rust that the string slice returned from the function will live at least as long as lifetime 'a. 
+
+
+The Static Lifetime
+
+One special lifetime we need to discuss is 'static, which denotes that the affected reference can live for the entire duration of the program. All string literals have the 'static lifetime, which we can annotate as follows:
+
+```
+let s: &'static str = "I have a static lifetime.";
+
+```
+
+#### Closures
+ This illustrates how closure syntax is similar to function syntax except for the use of pipes and the amount of syntax that is optional:
+
+ ```
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+```
+
+```
+    let example_closure = |x| x;
+
+    let s = example_closure(String::from("hello"));
+    let n = example_closure(5);
+```
+The first time we call example_closure with the String value, the compiler infers the type of x and the return type of the closure to be String. Those types are then locked into the closure in example_closure, and we get a type error if we try to use a different type with the same closure.
+
+
+#### Iterators
+In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator to use it up. 
+
+#### Smart Pointers
+
+Smart pointers, on the other hand, are data structures that act like a pointer but also have additional metadata and capabilities. 
+'String' and 'Vec<T>'  Both these types count as smart pointers because they own some memory and allow you to manipulate it.
+
+most common smart pointers in the standard library:
+
+- Box<T> for allocating values on the heap
+- Rc<T>, a reference counting type that enables multiple ownership
+- Ref<T> and RefMut<T>, accessed through RefCell<T>, a type that enforces the borrowing rules at runtime instead of compile time
+
+Box<T> - 
+
+   - When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size
+   - When you have a large amount of data and you want to transfer ownership but ensure the data won’t be copied when you do so
+   - When you want to own a value and you care only that it’s a type that implements a particular trait rather than being of a specific type
+The Box<T> type is a smart pointer because it implements the Deref trait, which allows Box<T> values to be treated like references. When a Box<T> value goes out of scope, the heap data that the box is pointing to is cleaned up as well because of the Drop trait implementation.
+
+Rc<T>, the Reference Counted Smart Pointer - 
+In the majority of cases, ownership is clear: you know exactly which variable owns a given value. However, there are cases when a single value might have multiple owners. For example, in graph data structures, multiple edges might point to the same node, and that node is conceptually owned by all of the edges that point to it. 
+
+You have to enable multiple ownership explicitly by using the Rust type Rc<T>, which is an abbreviation for reference counting. 
+The Rc<T> type keeps track of the number of references to a value to determine whether or not the value is still in use. If there are zero references to a value, the value can be cleaned up without any references becoming invalid.
+
+We use the Rc<T> type when we want to allocate some data on the heap for multiple parts of our program to read and we can’t determine at compile time which part will finish using the data last. 
+
+example :
+```
+enum List {
+    Cons(i32, Rc<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    let b = Cons(3, Rc::clone(&a));
+    let c = Cons(4, Rc::clone(&a));
+}
+
+```
+
+RefCell<T> - Enforcing Borrowing Rules at Runtime
+Unlike Rc<T>, the RefCell<T> type represents single ownership over the data it holds. So, what makes RefCell<T> different from a type like Box<T>?
+
+With references and Box<T>, the borrowing rules’ invariants are enforced at compile time. With RefCell<T>, these invariants are enforced at runtime. With references, if you break these rules, you’ll get a compiler error. With RefCell<T>, if you break these rules, your program will panic and exit.
+
+
+Similar to Rc<T>, RefCell<T> is only for use in single-threaded scenarios and will give you a compile-time error if you try using it in a multithreaded context. 
+
+
+
+   - Rc<T> enables multiple owners of the same data; Box<T> and RefCell<T> have single owners.
+    - Box<T> allows immutable or mutable borrows checked at compile time; Rc<T> allows only immutable borrows checked at compile time; RefCell<T> allows immutable or mutable borrows checked at runtime.
+    - Because RefCell<T> allows mutable borrows checked at runtime, you can mutate the value inside the RefCell<T> even when the RefCell<T> is immutable.
+
+
+#### Concurrency
+- Creating a New Thread with spawn
+To create a new thread, we call the thread::spawn function and pass it a closure containing the code we want to run in the new thread.
+```
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+     let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+```
+- Waiting for All Threads to Finish Using join Handles
+A JoinHandle is an owned value that, when we call the join method on it, will wait for its thread to finish.
+
+```
+    handle.join().unwrap();
+```
+- Using move Closures with Threads
+We'll often use the move keyword with closures passed to thread::spawn because the closure will then take ownership of the values it uses from the environment, thus transferring ownership of those values from one thread to another. 
+
+```
+use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let handle = thread::spawn(move || {
+        println!("Here's a vector: {:?}", v);
+    });
+
+    handle.join().unwrap();
+}
+```
+
+- Channel - Using Message Passing to Transfer Data Between Threads
+```
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let val = String::from("hi");
+        tx.send(val).unwrap();
+    });
+
+    let received = rx.recv().unwrap();
+    println!("Got: {}", received);
+}
+```
+
+- Atomic Reference Counting with Arc<T> 
+
+Fortunately, Arc<T> is a type like Rc<T> that is safe to use in concurrent situations. The a stands for atomic, meaning it’s an atomically reference counted type. 
+
+```
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
+Send - 
+The Send marker trait indicates that ownership of values of the type implementing Send can be transferred between threads. Almost every Rust type is Send, but there are some exceptions, including Rc<T>: this cannot be Send because if you cloned an Rc<T> value and tried to transfer ownership of the clone to another thread, both threads might update the reference count at the same time
+
+Sync - 
+The Sync marker trait indicates that it is safe for the type implementing Sync to be referenced from multiple threads.
