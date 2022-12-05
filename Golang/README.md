@@ -9,6 +9,7 @@
 4. https://golang.org/doc/code.html
 
 ### Blogs
+- https://github.com/tmrts/go-patterns
 
 #### Syntax
 * https://blog.golang.org/declaration-syntax
