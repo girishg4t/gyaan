@@ -1,6 +1,6 @@
 # gyaan
 
-This repository is to maintain what i have learned and can be helpfull for other 
+This repository is to maintain what I have learned and can be helpful for others. 
 
 
 Top 10 websites for remote work opportunities 🚀  
