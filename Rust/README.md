@@ -431,3 +431,57 @@ The Send marker trait indicates that ownership of values of the type implementin
 
 Sync - 
 The Sync marker trait indicates that it is safe for the type implementing Sync to be referenced from multiple threads.
+
+
+    
+Basic Questions
+
+    What is Rust and what are its primary features?
+    How does Rust ensure memory safety without a garbage collector?
+    What is ownership in Rust and why is it important?
+    Explain the difference between String and &str in Rust.
+    What are Option and Result types in Rust? How do they differ?
+    How do you handle errors in Rust?
+    What is the purpose of the Cargo tool in Rust?
+    What are lifetimes in Rust and why are they necessary?
+    How do you define and use a struct in Rust?
+    What are traits and how are they used in Rust?
+
+Intermediate Questions
+
+    Explain the concept of borrowing and mutable borrowing in Rust.
+    How do you implement concurrency in Rust?
+    What is a trait object and when would you use one?
+    Describe the use of unsafe in Rust. When is it appropriate to use it?
+    What are some common patterns for error handling in Rust?
+    How do you perform pattern matching in Rust?
+    Explain the difference between Rc and Arc.
+    What is the Drop trait and when would you implement it?
+    How do you implement a custom iterator in Rust?
+    What is the purpose of the std::sync::mpsc module?
+
+Advanced Questions
+
+    Explain how Rust's type system helps in writing safe concurrent programs.
+    How does Rust's borrowing mechanism prevent data races?
+    Describe how you can use async/await for asynchronous programming in Rust.
+    What are some of the limitations of Rust's borrow checker and how can you work around them?
+    Discuss the concept of zero-cost abstractions in Rust.
+    How would you implement a thread-safe shared state in Rust?
+    Explain what macros are in Rust and how they differ from functions.
+    What is the purpose of the Pin type in Rust?
+    How do you manage dependencies in a Rust project?
+    What are some common strategies for optimizing Rust code for performance?
+
+Practical Tasks
+
+    Write a function that takes a list of integers and returns the sum of all elements.
+    Implement a simple CLI tool using the clap crate that takes user input and prints it.
+    Create a simple web server using the rocket or actix-web crate that serves a static HTML page.
+    Write a program that reads a file and counts the number of lines, words, and characters.
+    Implement a custom trait and demonstrate its use with a struct.
+    Create a multi-threaded program that calculates the factorial of a number using threads.
+    Write a function that uses pattern matching to handle different Result and Option values.
+    Implement a simple key-value store using a HashMap.
+    Write a Rust program that sends messages between threads using channels.
+    Create a simple static site generator that reads Markdown files and outputs HTML files.
